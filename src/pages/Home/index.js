@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { MdShoppingCart } from 'react-icons/md';
-import PropTypes from 'prop-types';
 
 import { ProductList } from './styles';
 import { formatPrice } from '../../util/format';
@@ -11,8 +10,6 @@ import api from '../../services/api';
 import { connect } from 'react-redux';
 
 class Home extends Component {
-
-  // static propTypes = 
 
   state = {
     products: [],
