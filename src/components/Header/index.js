@@ -1,12 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { MdShoppingBasket } from 'react-icons/md';
 
 import { Container, Cart } from './styles';
 import logo from '../../assets/images/rocketshoes.svg';
 
-function Header() {
+function Header({ cartSize }) {
+    /**Esse cart é uma propriedade que vem la de baixo, la do meu export ... connect() é o mesmo nome do objeto que ta la embaixo. 
+     * Ele vai renderizar sempre o novo estado. OBS.: ele deve renderizar, pois ele não é persistente, igual o vuex.
+    */
+
     return (
         <Container>
             <Link to="/">
@@ -17,7 +22,7 @@ function Header() {
             <Cart to="/cart">
                 <div>
                     <strong>Meu carrinho</strong>
-                    <span>3 itens</span>
+                    <span>{cartSize} itens</span>
                 </div>
                 <MdShoppingBasket size={36} color="#FFF" />
             </Cart>
@@ -25,4 +30,9 @@ function Header() {
     );
 }
 
-export default Header;
+export default connect(state => ({
+    /**esse STATE é o ESTADO TODO.
+     * esse state.cart é um REDUCER. Vem do rootReducer.
+     */
+    cartSize: state.cart.length,
+}))(Header);
